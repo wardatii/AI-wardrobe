@@ -43,7 +43,7 @@ export function Survey() {
       style,
       favoriteColors: colors,
     });
-    navigate("/");
+    navigate("/app");
   };
 
   return (

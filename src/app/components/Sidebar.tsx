@@ -14,15 +14,15 @@ export function Sidebar() {
   const { logout, user } = useAuth();
 
   const isMen = user?.preferences?.gender === "men";
-  const wardrobePath = isMen ? "/men" : "/women";
+  const wardrobePath = isMen ? "/app/men" : "/app/women";
 
   const navigation = [
-    { name: "Dashboard", href: "/", icon: LayoutDashboard },
-    { name: "Women's Wardrobe", href: "/women", icon: Shirt },
-    { name: "Men's Wardrobe", href: "/men", icon: Shirt },
-    { name: "AI Stylist", href: "/ai-chat", icon: MessageSquare },
-    { name: "Saved Outfits", href: "/ai-suggestions", icon: Heart },
-    { name: "Profile", href: "/profile", icon: User },
+    { name: "Dashboard", href: "/app", icon: LayoutDashboard },
+    { name: "Women's Wardrobe", href: "/app/women", icon: Shirt },
+    { name: "Men's Wardrobe", href: "/app/men", icon: Shirt },
+    { name: "AI Stylist", href: "/app/ai-chat", icon: MessageSquare },
+    { name: "Saved Outfits", href: "/app/ai-suggestions", icon: Heart },
+    { name: "Profile", href: "/app/profile", icon: User },
   ];
 
   return (
