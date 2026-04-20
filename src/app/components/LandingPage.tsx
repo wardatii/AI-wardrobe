@@ -24,6 +24,75 @@ import {
   Zap,
 } from "lucide-react";
 
+/* ─── Sub-components defined OUTSIDE LandingPage to prevent remount on re-render ─── */
+const PhotoCard = ({ img, title, tag, tall = true }: { img: string; title: string; tag: string; tall?: boolean }) => (
+  <div
+    className="group relative overflow-hidden cursor-pointer"
+    style={{ borderRadius: "20px", border: "1px solid rgba(45,38,35,0.06)", background: "#fff" }}
+  >
+    <div style={{ aspectRatio: tall ? "3/4" : "1/1", overflow: "hidden" }}>
+      <img
+        src={img}
+        alt={title}
+        style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.5s" }}
+        className="group-hover:scale-110"
+      />
+    </div>
+    <div
+      style={{
+        position: "absolute", inset: 0,
+        background: "linear-gradient(to top, rgba(253,251,247,0.95) 0%, rgba(253,251,247,0.4) 40%, transparent 100%)",
+        display: "flex", flexDirection: "column", justifyContent: "flex-end",
+        padding: "20px",
+      }}
+    >
+      <span style={{ fontSize: "11px", color: "#c2887a", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "4px" }}>
+        {tag}
+      </span>
+      <span style={{ fontSize: "16px", fontWeight: 600, color: "#2d2623" }}>{title}</span>
+    </div>
+  </div>
+);
+
+const InputField = ({
+  type, value, onChange, placeholder, icon: Icon, label,
+}: {
+  type: string; value: string; onChange: (v: string) => void;
+  placeholder: string; icon: any; label: string;
+}) => (
+  <div style={{ marginBottom: "18px" }}>
+    <label style={{ display: "block", fontSize: "13px", fontWeight: 500, color: "#665a54", marginBottom: "8px" }}>
+      {label}
+    </label>
+    <div style={{ position: "relative" }}>
+      <Icon style={{ position: "absolute", left: "14px", top: "50%", transform: "translateY(-50%)", width: "16px", height: "16px", color: "#a1938a" }} />
+      <input
+        type={type}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder={placeholder}
+        required
+        style={{
+          width: "100%",
+          paddingLeft: "42px",
+          paddingRight: "16px",
+          paddingTop: "13px",
+          paddingBottom: "13px",
+          background: "#f9f8f5",
+          border: "1px solid rgba(45,38,35,0.1)",
+          borderRadius: "12px",
+          color: "#2d2623",
+          fontSize: "14px",
+          outline: "none",
+          boxSizing: "border-box" as const,
+        }}
+        onFocus={(e) => e.target.style.borderColor = "#c2887a"}
+        onBlur={(e) => e.target.style.borderColor = "rgba(45,38,35,0.1)"}
+      />
+    </div>
+  </div>
+);
+
 /* ─── Inline styles as JS objects for consistency ─── */
 const S = {
   page: {
@@ -179,75 +248,6 @@ export function LandingPage() {
     { title: "Silver Chain",   cat: "Accessories", img: "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=400&h=400&fit=crop" },
     { title: "Designer Belt",  cat: "Accessories", img: "https://images.unsplash.com/photo-1624222247344-550fb60583c2?w=400&h=400&fit=crop" },
   ];
-
-  /* ─── Sub-components ─── */
-  const PhotoCard = ({ img, title, tag, tall = true }: { img: string; title: string; tag: string; tall?: boolean }) => (
-    <div
-      className="group relative overflow-hidden cursor-pointer"
-      style={{ borderRadius: "20px", border: "1px solid rgba(45,38,35,0.06)", background: "#fff" }}
-    >
-      <div style={{ aspectRatio: tall ? "3/4" : "1/1", overflow: "hidden" }}>
-        <img
-          src={img}
-          alt={title}
-          style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.5s" }}
-          className="group-hover:scale-110"
-        />
-      </div>
-      <div
-        style={{
-          position: "absolute", inset: 0,
-          background: "linear-gradient(to top, rgba(253,251,247,0.95) 0%, rgba(253,251,247,0.4) 40%, transparent 100%)",
-          display: "flex", flexDirection: "column", justifyContent: "flex-end",
-          padding: "20px",
-        }}
-      >
-        <span style={{ fontSize: "11px", color: "#c2887a", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "4px" }}>
-          {tag}
-        </span>
-        <span style={{ fontSize: "16px", fontWeight: 600, color: "#2d2623" }}>{title}</span>
-      </div>
-    </div>
-  );
-
-  const InputField = ({
-    type, value, onChange, placeholder, icon: Icon, label,
-  }: {
-    type: string; value: string; onChange: (v: string) => void;
-    placeholder: string; icon: any; label: string;
-  }) => (
-    <div style={{ marginBottom: "18px" }}>
-      <label style={{ display: "block", fontSize: "13px", fontWeight: 500, color: "#665a54", marginBottom: "8px" }}>
-        {label}
-      </label>
-      <div style={{ position: "relative" }}>
-        <Icon style={{ position: "absolute", left: "14px", top: "50%", transform: "translateY(-50%)", width: "16px", height: "16px", color: "#a1938a" }} />
-        <input
-          type={type}
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
-          placeholder={placeholder}
-          required
-          style={{
-            width: "100%",
-            paddingLeft: "42px",
-            paddingRight: "16px",
-            paddingTop: "13px",
-            paddingBottom: "13px",
-            background: "#f9f8f5",
-            border: "1px solid rgba(45,38,35,0.1)",
-            borderRadius: "12px",
-            color: "#2d2623",
-            fontSize: "14px",
-            outline: "none",
-            boxSizing: "border-box" as const,
-          }}
-          onFocus={(e) => e.target.style.borderColor = "#c2887a"}
-          onBlur={(e) => e.target.style.borderColor = "rgba(45,38,35,0.1)"}
-        />
-      </div>
-    </div>
-  );
 
   return (
     <div style={S.page}>

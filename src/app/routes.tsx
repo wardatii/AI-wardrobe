@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router";
+import { createHashRouter } from "react-router";
 import { MainLayout } from "./components/MainLayout";
 import { Dashboard } from "./components/Dashboard";
 import { LandingPage } from "./components/LandingPage";
@@ -9,7 +9,7 @@ import { AISuggestions } from "./components/AISuggestions";
 import { Profile } from "./components/Profile";
 import { AIChat } from "./components/AIChat";
 
-export const router = createBrowserRouter([
+export const router = createHashRouter([
   {
     path: "/welcome",
     Component: LandingPage,
