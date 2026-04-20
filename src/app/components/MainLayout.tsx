@@ -9,9 +9,9 @@ export function MainLayout() {
 
   useEffect(() => {
     if (!user) {
-      navigate("/welcome");
-    } else if (!user.profileComplete) {
-      navigate("/survey");
+      navigate("/welcome", { replace: true });
+    } else if (user && !user.profileComplete) {
+      navigate("/survey", { replace: true });
     }
   }, [user, navigate]);
 
@@ -28,3 +28,4 @@ export function MainLayout() {
     </div>
   );
 }
+

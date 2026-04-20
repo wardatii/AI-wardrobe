@@ -170,7 +170,7 @@ export function LandingPage() {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     await login(email, password);
-    navigate("/");
+    navigate("/app");
   };
 
   const handleRegister = async (e: React.FormEvent) => {

@@ -2,6 +2,8 @@ import { createHashRouter, Navigate } from "react-router";
 import { MainLayout } from "./components/MainLayout";
 import { Dashboard } from "./components/Dashboard";
 import { LandingPage } from "./components/LandingPage";
+import { Login } from "./components/auth/Login";
+import { Register } from "./components/auth/Register";
 import { Survey } from "./components/auth/Survey";
 import { WomenWardrobe } from "./components/wardrobe/WomenWardrobe";
 import { MenWardrobe } from "./components/wardrobe/MenWardrobe";
@@ -11,13 +13,21 @@ import { AIChat } from "./components/AIChat";
 
 export const router = createHashRouter([
   {
-    // Root path redirects to landing page — fixes GitHub Pages white screen
+    // Root redirects to landing page
     path: "/",
     element: <Navigate to="/welcome" replace />,
   },
   {
     path: "/welcome",
     Component: LandingPage,
+  },
+  {
+    path: "/login",
+    Component: Login,
+  },
+  {
+    path: "/register",
+    Component: Register,
   },
   {
     path: "/survey",
@@ -34,5 +44,10 @@ export const router = createHashRouter([
       { path: "ai-chat", Component: AIChat },
       { path: "profile", Component: Profile },
     ],
+  },
+  {
+    // Catch-all: redirect unknown URLs to welcome
+    path: "*",
+    element: <Navigate to="/welcome" replace />,
   },
 ]);
